@@ -1,0 +1,90 @@
+<style>
+  .image-list {
+    display: flex;
+  }
+
+  .image-item {
+    flex-basis: 25%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container">
+  <h3 class="my-3">Product Form</h3>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="productName">Product Name</label>
+      <input
+        type="text"
+        id="productName"
+        class="form-control"
+        formControlName="productName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="productPrice">Product Price</label>
+      <input
+        type="number"
+        id="productPrice"
+        class="form-control"
+        formControlName="productPrice"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="productSKU">Product SKU</label>
+      <input
+        type="number"
+        id="productSKU"
+        class="form-control"
+        formControlName="productSKU"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="productImages">Product Images</label>
+      <input
+        type="file"
+        id="productImages"
+        multiple
+        class="form-control-file"
+        (change)="onFileChange($event)"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div class="image-list d-flex flex-wrap">
+    <div
+      class="image-item"
+      *ngFor="let productImage of product?.product_images"
+    >
+      <div class="card" style="width: 18rem">
+        <div class="d-flex justify-content-end">
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deteleProductImage(productImage.id)"
+          >
+            Delete
+          </button>
+        </div>
+        <img
+          class="card-img-top"
+          [src]="
+            productImage
+              ? 'assets/images/' + productImage.fileName
+              : 'https://cdn.shopify.com/s/files/1/0702/9017/8333/files/Bliss_Homepage_Banner_Image_Mobile_2x_copy.jpg?v=1678733951'
+          "
+          [alt]="productImage?.fileName"
+        />
+      </div>
+    </div>
+  </div>
+</div>

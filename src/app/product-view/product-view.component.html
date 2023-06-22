@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="m-3">
+    <h1>Product : {{ product?.product_name }}</h1>
+    <h1>Price : {{ product?.product_price }}</h1>
+    <h1>Available Stock : {{ product?.product_SKU }}</h1>
+    <button
+      type="button"
+      class="btn btn-primary mt-4"
+      (click)="onClickToEdit()"
+    >
+      Edit Product
+    </button>
+  </div>
+  <div class="div">
+    <hr />
+    <h1>Images</h1>
+    <div class="d-flex">
+      <div *ngFor="let productImage of product?.product_images">
+        <div class="pd-3 m-2">
+          <img
+            class="img-thumbnail my-3"
+            [src]="
+              product.product_images?.length
+                ? 'assets/images/' + productImage.fileName
+                : 'https://cdn.shopify.com/s/files/1/0702/9017/8333/files/Bliss_Homepage_Banner_Image_Mobile_2x_copy.jpg?v=1678733951'
+            "
+            [alt]="
+              product.product_images?.length &&
+              product.product_images[0].fileName
+            "
+            width="500"
+            height="600"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

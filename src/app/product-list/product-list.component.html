@@ -1,0 +1,60 @@
+<style>
+  .img-height {
+    height: 300px; /* Adjust the height value as needed */
+  }
+</style>
+
+<div class="container">
+  <div class="d-flex justify-content-end mt-4">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onClickAddNewClick()"
+    >
+      Add New Product
+    </button>
+  </div>
+
+  <h2>Product List</h2>
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-4 col-md-6 col-sm-12 p-2"
+        *ngFor="let product of products"
+      >
+        <div class="card h-100">
+          <img
+            class="img-height"
+            [src]="
+              product.product_images?.length
+                ? 'assets/images/' + product.product_images[0].fileName
+                : 'https://cdn.shopify.com/s/files/1/0702/9017/8333/files/Bliss_Homepage_Banner_Image_Mobile_2x_copy.jpg?v=1678733951'
+            "
+            [alt]="
+              product.product_images?.length &&
+              product.product_images[0].fileName
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ product.product_name }}</h5>
+            <p class="card-text">₹{{ product.product_price }}</p>
+            <div class="d-flex justify-content-between">
+              <button
+                class="btn btn-warning"
+                (click)="onClickProductClick(product.id)"
+              >
+                View Product
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="onClickDelelteClick(product.id)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
